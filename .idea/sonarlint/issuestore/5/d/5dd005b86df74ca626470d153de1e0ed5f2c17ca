@@ -1,0 +1,22 @@
+
+jsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ææ¯8åË¼úæ-
+asquid:S1854x"CRemove this useless assignment to local variable "captureListener".(ÑğÅÙ8²ºäÅç-
+osquid:CommentedOutCodeLineÕ"<This block of commented-out lines of code should be removed.(“ä„ñıÿÿÿÿ8²ºäÅç-
+gsquid:UnusedPrivateMethodß"5Remove this unused private "drawRectsByVolum" method.(ç±”‡ûÿÿÿÿ8…˜µúæ-
+>squid:S1659R" Declare "g2" on a separate line.(ÿ‘Ÿï8²ºäÅç-
+>squid:S1659R" Declare "b2" on a separate line.(ÿ‘Ÿï8²ºäÅç-
+Rsquid:S1481x"4Remove this unused "captureListener" local variable.(ÑğÅÙ8²ºäÅç-
+jsquid:CommentedOutCodeLineƒ"<This block of commented-out lines of code should be removed.(‚ó«È8²ºäÅç-
+>squid:S1659R" Declare "g1" on a separate line.(ÿ‘Ÿï8²ºäÅç-
+>squid:S1659R" Declare "r2" on a separate line.(ÿ‘Ÿï8²ºäÅç-
+Ksquid:S1068"-Remove this unused "mSpaceMin" private field.(¿£–Ï8²ºäÅç-
+~squid:S1450"[Remove the "mRenderColor" field and declare it as a local variable in the relevant methods.(Ñœü—üÿÿÿÿ8²ºäÅç-
+osquid:CommentedOutCodeLine‹"<This block of commented-out lines of code should be removed.(ÿ¼êëúÿÿÿÿ8²ºäÅç-
+‘ squid:ForLoopCounterChangedCheck³"XRefactor the code in order to not assign to this loop counter from within the loop body.( æƒ«ıÿÿÿÿ8²ºäÅç-
+vsquid:S1450"XRemove the "mSpaceMin" field and declare it as a local variable in the relevant methods.(¿£–Ï8²ºäÅç-
+osquid:CommentedOutCodeLine‘"<This block of commented-out lines of code should be removed.(”•äñùÿÿÿÿ8…˜µúæ-
+Œ squid:ForLoopCounterChangedCheck´"XRefactor the code in order to not assign to this loop counter from within the loop body.(¯ÀÚè8²ºäÅç-
+isquid:CommentedOutCodeLine|"<This block of commented-out lines of code should be removed.(Ä¬ÕÊ8²ºäÅç-
+Gsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8²ºäÅç-
+>squid:S1659R" Declare "b1" on a separate line.(ÿ‘Ÿï8²ºäÅç-
+nsquid:S1192m"KDefine a constant instead of duplicating this literal "Visualizer" 3 times.(µ¦ûÎúÿÿÿÿ8²ºäÅç-

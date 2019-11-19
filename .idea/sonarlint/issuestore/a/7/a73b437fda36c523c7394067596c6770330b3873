@@ -1,0 +1,14 @@
+
+Qsquid:S1481Ö"-Remove this unused "baseLine" local variable.(ÌÍóáùÿÿÿÿ8™ÉÙğæ-
+csquid:CommentedOutCodeLine¡"<This block of commented-out lines of code should be removed.(ùÛ°
+hsquid:CommentedOutCodeLine«"<This block of commented-out lines of code should be removed.(æÏ×Õşÿÿÿÿ
+csquid:CommentedOutCodeLine³"<This block of commented-out lines of code should be removed.(º¨¸Å
+hsquid:CommentedOutCodeLineÒ"<This block of commented-out lines of code should be removed.(äË½¦øÿÿÿÿ
+Nsquid:S1854"6Remove this useless assignment to local variable "cy".(×˜‡Ğ
+osquid:CommentedOutCodeLineÙ"<This block of commented-out lines of code should be removed.(¨ş Şÿÿÿÿÿ8‚óüïæ-
+jsquid:CommentedOutCodeLineµ"<This block of commented-out lines of code should be removed.(•ÎïÖ8ß¶…ğæ-
+`squid:S1854Ö"<Remove this useless assignment to local variable "baseLine".(ÌÍóáùÿÿÿÿ8™ÉÙğæ-
+?squid:S1481"'Remove this unused "cy" local variable.(×˜‡Ğ
+isquid:CommentedOutCodeLineæ"<This block of commented-out lines of code should be removed.(‚¥…y8° „òæ-
+hsquid:CommentedOutCodeLine­"<This block of commented-out lines of code should be removed.(”˜¦œûÿÿÿÿ
+Lsquid:S1068(".Remove this unused "mPointSize" private field.(É¡ü8÷Ú…òæ-

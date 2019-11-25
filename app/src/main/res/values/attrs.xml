@@ -3,6 +3,7 @@
     <!-- 水平进度条 (带文字)-->
     <declare-styleable name="HorzTextProgressView">
         <attr name="progress_horz_text_start" format="integer"/>  //开始时间文字
+        <attr name="progress_horz_text_margin_start" format="integer"/>  //开始时间文字
         <attr name="progress_horz_text_end" format="integer"/>  //结束时间文字
         <attr name="progress_horz_textSize" format="dimension"/> //文字大小
         <attr name="progress_horz_textColor" format="color"/> //文字颜色
@@ -18,6 +19,7 @@
         <attr name="progress_horz_rect_w" format="dimension"/> //进度点长方形 宽
         <attr name="progress_horz_rect_h" format="dimension"/> //进度点长方形 高
         <attr name="progress_horz_dy" format="dimension"/> //默认时间与进度条Y间距
+        <attr name="progress_horz_bg_rect_h" format="dimension"/> //默认时间与进度条Y间距
     </declare-styleable>
     <!-- 圆角-->
     <declare-styleable name="RoundMaskView">

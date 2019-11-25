@@ -1,10 +1,13 @@
 package com.example.mykotlin
 
+
 import org.junit.Test
 
 import org.junit.Assert.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
+import java.util.logging.SimpleFormatter
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -110,5 +113,28 @@ class ExampleUnitTest {
         println("is equal: ${a.isEqual}")
 
     }
+    @Test
+    fun calculateTime() {
 
+        var duration: Long = 1574419517_000
+        var time = ""
+        val hours = 0
+        val minute = (duration / 60000).toLong()
+        val seconds = (duration % 60000).toLong()
+        val second = Math.floor(seconds.toDouble() / 1000).toLong()
+        println("时间: hours:" + hours)
+
+        if (minute < 10) {
+            time += "0"
+        }
+        time += "$minute:"
+        if (second < 10) {
+            time += "0"
+        }
+        time += second
+        val format = SimpleDateFormat("HH:mm:ss")
+        val t1=System.currentTimeMillis()
+       time = format .format(duration)
+        println("时间: time:$time, 耗时:${System.currentTimeMillis()-t1}" )
+    }
 }

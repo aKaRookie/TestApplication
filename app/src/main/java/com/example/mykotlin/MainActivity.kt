@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.util.Log
+import android.widget.ProgressBar
+import android.widget.SeekBar
 import com.example.mykotlin.audio.IMediaPlayer
 import com.example.mykotlin.audio.IMediaStatusListener
 import com.example.mykotlin.audio.MediaPlayerService
@@ -16,16 +18,40 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 const val TAG = "MainActivity"
 
-class MainActivity : AppCompatActivity(), ServiceConnection,Runnable {
+class MainActivity : AppCompatActivity(), ServiceConnection, Runnable, HorzTextProgressView1.OnProgressChangeListener {
+    override fun onStartTracking() {
+        mService?.let {
+            mProgressHandler.removeCallbacks(this@MainActivity)
+        }
+    }
 
+    override fun onStopTracking(progress: Double) {
+        mService?.let {
+            Log.i(TAG,"更新进度至:position= $progress")
+            it.seekTo(progress.toLong())
+            mProgressHandler.removeCallbacks(this@MainActivity)
+            mProgressHandler.post(this@MainActivity)
+        }
+
+    }
+
+    //当前MediaPlayer播放状态
     private var mCurStatus = -1
+
     private inner class MyCallBack : IMediaStatusListener.Stub(), IMediaStatusListener {
         override fun onUpdateStatus(status: Int) {
             Log.i(TAG, "更新状态! status: $status")
-            when(status){
-                2 ,3->  {
+            when (status) {
+                3 -> {
+                    //播放
                     mProgressHandler.removeCallbacks(this@MainActivity)
                     mProgressHandler.post(this@MainActivity)
+                }
+                5->{
+                    //播放完成
+                    tv.text ="播放"
+                    home_iv_media_spectrogram.pause()
+                    mProgressHandler.removeCallbacksAndMessages(null)
                 }
                 else -> mProgressHandler.removeCallbacksAndMessages(null)
             }
@@ -72,6 +98,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection,Runnable {
                 stub.stop()
             }
         }
+        live_progress.setOnProgressChangedListener(this)
         initData()
     }
 
@@ -87,6 +114,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection,Runnable {
         val intent = Intent(this, MediaPlayerService::class.java)
         bindService(intent, this, Context.BIND_AUTO_CREATE)
         startService(intent)
+
     }
 
     /* override fun onBindingDied(name: ComponentName?) {
@@ -117,9 +145,10 @@ class MainActivity : AppCompatActivity(), ServiceConnection,Runnable {
         super.onPause()
         mProgressHandler.removeCallbacksAndMessages(null)
     }
+
     override fun onResume() {
         super.onResume()
-        if(mCurStatus == 2 || mCurStatus == 3){
+        if (mCurStatus == 2 || mCurStatus == 3) {
             mProgressHandler.post(this)
         }
     }
@@ -131,12 +160,13 @@ class MainActivity : AppCompatActivity(), ServiceConnection,Runnable {
 
     private val mProgressHandler: Handler = Handler()
     override fun run() {
-        Log.i(TAG,"更新进度!")
         mService?.let {
             mPostion = it.currentPosition
             mDuration = it.duration
+            //it.seekTo(3L*mPostion)
         }
+        Log.i(TAG, "更新进度! Position: $mPostion")
         updateUI()
-        mProgressHandler.postDelayed(this,1000)
+        mProgressHandler.postDelayed(this, 1000)
     }
 }

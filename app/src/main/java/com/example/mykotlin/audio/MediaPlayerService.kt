@@ -34,14 +34,17 @@ class MediaPlayerService : IntentService("MediaPlayerService"),
 
     override fun onCompletion(mp: MediaPlayer?) {
         Log.i(TAG, "onCompletion")
+        mStatusListener?.onUpdateStatus(mMediaPlayer.currentState)
     }
 
     override fun onSeekComplete(mp: MediaPlayer?) {
-        Log.i(TAG, "onSeekComplete")
+        Log.i(TAG, "onSeekComplete: prosition = ${mp?.currentPosition}")
+        mStatusListener?.onUpdateStatus(mMediaPlayer.currentState)
     }
 
     override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
         Log.w(TAG, "onError")
+        mStatusListener?.onUpdateStatus(mMediaPlayer.currentState)
         return false
     }
 
@@ -65,6 +68,7 @@ class MediaPlayerService : IntentService("MediaPlayerService"),
                 mMediaPlayer.stopPlayback()
             }
             WHAT_SEEK -> {
+                Log.i(TAG,"server: 更新进度: ${it.arg1}")
                 mMediaPlayer.seekTo(it.arg1)
             }
             WHAT_SET_URL -> {
@@ -136,7 +140,7 @@ class MediaPlayerService : IntentService("MediaPlayerService"),
         }
 
         override fun seekTo(progress: Long) {
-            mHandler.obtainMessage(WHAT_SEEK, progress).sendToTarget()
+            mHandler.obtainMessage(WHAT_SEEK, progress.toInt(),0).sendToTarget()
         }
 
         override fun getCurrentPosition(): Int {

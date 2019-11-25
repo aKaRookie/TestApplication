@@ -19,7 +19,7 @@ import java.util.Random;
  * @update fenghl
  */
 public class VisualizerView extends View {
-    private static final int DEFAULT_NUM_COLUMNS = 55;
+    private static final int DEFAULT_NUM_COLUMNS = 50;
     private byte[] mBytes;
     private Paint mForePaint = new Paint();
     private int mNumColumns = 55;
@@ -63,20 +63,21 @@ public class VisualizerView extends View {
 
     /**
      * 颜色渐变
-     * @param cl1 颜色1
-     * @param cl2 颜色2
+     *
+     * @param cl1   颜色1
+     * @param cl2   颜色2
      * @param index 索引
-     * @param num 总个数
+     * @param num   总个数
      * @return 计算渐变后的颜色
      */
-    public int getColorChanges(int cl1, int cl2, float index,int num) {
-        if (num <=0){
+    public int getColorChanges(int cl1, int cl2, float index, int num) {
+        if (num <= 0) {
             num = 1;
         }
-        if (index<0){
-            index=0;
-        }else if (index>num){
-            index=num;
+        if (index < 0) {
+            index = 0;
+        } else if (index > num) {
+            index = num;
         }
 
         float r1, g1, b1, r2, g2, b2;
@@ -100,7 +101,7 @@ public class VisualizerView extends View {
         for (int i = 0; i < mNumColumns; i++) {
             mPaints[i] = new Paint();
             mPaints[i].setAntiAlias(true);
-            c = getColorChanges(startColor, endColor, i,mNumColumns);
+            c = getColorChanges(startColor, endColor, i, mNumColumns);
             mPaints[i].setColor(c);
         }
     }
@@ -187,36 +188,38 @@ public class VisualizerView extends View {
 
     Random random = new Random(100);
 
-    private float random() {
-        return random.nextFloat();
+    private float random(float min,float max) {
+        //取值0.5~1.0
+        return (random.nextFloat() * (max-min)+min);
     }
 
     private synchronized void drawRects(Canvas canvas) {
         if (mNumColumns > getWidth()) {
             mNumColumns = DEFAULT_NUM_COLUMNS;
         }
-        mColumnWidth = (float) getWidth() / (float) mNumColumns;
-        mSpaceMax = mColumnWidth / 4;
+        mColumnWidth = (float) getWidth() / (float) mNumColumns -mSpaceMax;
+        //mSpaceMax = mColumnWidth / 4;
 
         mBaseY = getHeight();
+        //每一条的高度
         float dh = 30.0f;
-
         for (int i = 0; i < mNumColumns; i++) {
-            float x = random();
+            float x = random(0.3f,0.9f);
             float height = dh * x;
 
             // 柱状图的左右坐标
-            float left = i * mColumnWidth + mSpaceMax;
-            float right = (i + 1) * mColumnWidth - mSpaceMax;
+            float left = i* (mColumnWidth+mSpaceMax);
+            float right =left + mColumnWidth ;
 
             RectF rect = createRectF(left, right, height);
 //            canvas.drawRect(rect, mPaints[i]);
-            canvas.drawRoundRect(rect,  3,  3, mPaints[i]);
+            canvas.drawRoundRect(rect, 0, 0, mPaints[i]);
         }
     }
-    private synchronized void drawClearRects(Canvas canvas){
+
+    private synchronized void drawClearRects(Canvas canvas) {
         for (int i = 0; i < mNumColumns; i++) {
-            canvas.drawRect(new RectF(0,0,0,0), mPaints[i]);
+            canvas.drawRect(new RectF(0, 0, 0, 0), mPaints[i]);
         }
     }
 
@@ -257,7 +260,9 @@ public class VisualizerView extends View {
     }
 
     private volatile boolean isRunning = false;
-
+    public void pause() {
+        isRunning = false;
+    }
     public void stop() {
         isRunning = false;
         invalidate();
@@ -280,7 +285,7 @@ public class VisualizerView extends View {
         super.onDraw(canvas);
         if (isRunning) {
             drawRects(canvas);
-            postInvalidateDelayed(150);
+            postInvalidateDelayed(200);
         } else {
             drawClearRects(canvas);
             //  clearDraw(canvas);
@@ -296,6 +301,6 @@ public class VisualizerView extends View {
      * @return 矩形
      */
     private RectF createRectF(float left, float right, float height) {
-        return new RectF(left, mBaseY - height, right, mBaseY);
+        return new RectF(left, (mBaseY - height) / 2, right, (mBaseY + height) / 2.0f);
     }
 }

@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.util.Log
+import java.net.URLEncoder
 
 private const val WHAT_INIT: Int = 0X8000
 private const val WHAT_PLAY = 0X8001
@@ -78,8 +79,10 @@ class MediaPlayerService : IntentService("MediaPlayerService"),
                     if (url.startsWith("http")) {
                         //mMediaPlayer.audioPath =
                         //    MediaCacheProxy.getInstance().getCachePatch(MediaCacheProxy.getInstance().path)
+
                         mMediaPlayer.audioPath =
                             MediaCacheProxy.getInstance().getCachePatch(url)
+                            //MediaCacheProxy.getInstance().getCachePatch( URLEncoder.encode(url,"utf-8"))
                     } else {
                         mMediaPlayer.setAudioURI(Uri.parse(url))
                     }

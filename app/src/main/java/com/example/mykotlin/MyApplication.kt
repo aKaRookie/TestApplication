@@ -2,10 +2,10 @@ package com.example.mykotlin
 
 import android.app.Application
 import android.content.Context
-import android.net.Uri
 import com.danikula.videocache.HttpProxyCacheServer
-import com.danikula.videocache.file.FileNameGenerator
-import java.io.File
+import info.guardianproject.netcipher.client.TlsOnlySocketFactory
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
 
 /**
  *
@@ -28,7 +28,15 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         sContext = applicationContext
+        configSSL()
     }
 
     private var proxy: HttpProxyCacheServer? = null
+    private fun configSSL(){
+
+        val sslContext = SSLContext.getInstance("TLS")
+        sslContext.init(null, null, null)
+        val noSSLv3Factory = TlsOnlySocketFactory(sslContext.socketFactory)
+        HttpsURLConnection.setDefaultSSLSocketFactory(noSSLv3Factory)
+    }
 }

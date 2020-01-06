@@ -7,6 +7,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Assert.*
+import java.net.URLEncoder
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,5 +32,11 @@ class ExampleInstrumentedTest {
         println("time long: t1=$t1,t2=$t2")
        var time =  SimpleDateFormat("HH:mm:ss").format(Date(t2))
         println("time: $time")
+    }
+    @Test
+    fun testUrl(){
+        val url = "https://broad-video.zhidaohulian.com/audio/栏目2.m4a"
+        println("before: $url")
+        println("after: ${URLEncoder.encode(url,"utf-8")}")
     }
 }

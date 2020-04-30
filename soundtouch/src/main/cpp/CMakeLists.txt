@@ -4,19 +4,51 @@
 # Sets the minimum version of CMake required to build the native library.
 
 cmake_minimum_required(VERSION 3.4.1)
-add_subdirectory(${CMAKE_SOURCE_DIR}/SoundTouch)
-add_subdirectory(${CMAKE_SOURCE_DIR}/SoundStretch)
-# Creates and names a library, sets it as either STATIC
-# or SHARED, and provides the relative paths to its source code.
-# You can define multiple libraries, and CMake builds them for you.
-# Gradle automatically packages shared libraries with your APK.
+#add_subdirectory(${CMAKE_SOURCE_DIR}/SoundTouch)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/SoundStretch)
 
+#获取当前目录
+set(pwd_dir ${CMAKE_SOURCE_DIR})
+#设置头文件
+set(include_dir
+        ${pwd_dir}
+        ${pwd_dir}/include
+        ${pwd_dir}/SoundTouch
+        ${pwd_dir}/SoundStretch
+        )
+#设置要编译的源文件
+set(source_files1
+
+        # ${pwd_dir}/SoundStretch/main.cpp
+        ${pwd_dir}/SoundStretch/RunParameters.cpp
+        ${pwd_dir}/SoundStretch/WavFile.cpp
+        )
+#设置要编译的源文件
+set(source_files2
+        ${pwd_dir}/soundtouch/AAFilter.cpp
+        ${pwd_dir}/soundtouch/BPMDetect.cpp
+        ${pwd_dir}/soundtouch/cpu_detect_x86.cpp
+        ${pwd_dir}/soundtouch/FIFOSampleBuffer.cpp
+        ${pwd_dir}/soundtouch/FIRFilter.cpp
+        ${pwd_dir}/soundtouch/InterpolateCubic.cpp
+        ${pwd_dir}/soundtouch/InterpolateLinear.cpp
+        ${pwd_dir}/soundtouch/InterpolateShannon.cpp
+        ${pwd_dir}/soundtouch/mmx_optimized.cpp
+        ${pwd_dir}/soundtouch/PeakFinder.cpp
+        ${pwd_dir}/soundtouch/RateTransposer.cpp
+        ${pwd_dir}/soundtouch/SoundTouch.cpp
+      #  ${pwd_dir}/soundtouch/soundtouch_wapper.cpp
+        ${pwd_dir}/soundtouch/sse_optimized.cpp
+        ${pwd_dir}/soundtouch/TDStretch.cpp
+        )
+include_directories(${include_dir})
 add_library( # Sets the name of the library.
         native-lib
 
         # Sets the library as a shared library.
         SHARED
-
+        ${source_files1}
+        ${source_files2}
         # Provides a relative path to your source file(s).
         native-lib.cpp)
 
@@ -39,8 +71,8 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
         native-lib
-        SoundTouch
-        SoundStretch
+        #[[SoundTouch
+        SoundStretch]]
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})

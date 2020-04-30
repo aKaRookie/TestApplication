@@ -3,8 +3,11 @@ package com.example.mykotlin
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.jakewharton.disklrucache.DiskLruCache
+import java.util.concurrent.locks.Condition
 
 /**
  *
@@ -24,6 +27,7 @@ open class DialogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initDialog()
+
     }
 
     private var mDialogView: View? = null

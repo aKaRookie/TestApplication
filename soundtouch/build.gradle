@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
 
 
     defaultConfig {
@@ -15,13 +15,13 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
         externalNativeBuild {
             cmake {
-                cppFlags "-std=c++11 -frtti -fexceptions -Wno-error=format-security"
+                cppFlags "-std=c++11 -frtti -fexceptions -Wno-error=format-security -fPIC -fpermissive -fvisibility=hidden -fdata-sections -ffunction-sections"
                 arguments
                 "-DANDROID_TOOLCHAIN=clang"
+                "-DANDROID_PLATFORM=android-16"
                 "-DANDROID_ARM_NEON=TRUE"
-                "-DANDROID_STL=gnustl_static"
-                "-DANDROID_STL=stlport_static"
-
+                "-DANDROID_STL=gnustl_shared"
+                "-DANDROID_STL=stlport_shared"
                 abiFilters "armeabi-v7a"
             }
         }
@@ -44,7 +44,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation  'com.android.support:appcompat-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

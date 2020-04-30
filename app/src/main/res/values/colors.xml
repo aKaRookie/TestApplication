@@ -21,4 +21,7 @@
     <color name="color_2D3130">#2D3130</color>
     <color name="color_D7D7D7">#D7D7D7</color>
 
+    <color name="wave_line_start_color">#FF3F57</color>
+    <color name="wave_line_end_color">#FF654C</color>
+
 </resources>

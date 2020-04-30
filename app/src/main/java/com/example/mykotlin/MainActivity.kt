@@ -4,24 +4,24 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.util.Log
 import android.widget.ProgressBar
-import android.widget.SeekBar
 import android.widget.TextView
 import com.example.mykotlin.audio.IMediaPlayer
 import com.example.mykotlin.audio.IMediaStatusListener
 import com.example.mykotlin.audio.MediaPlayerService
-import com.zhidaoauto.lib.soundtouch.SoundTouch
+import com.zhidaoauto.soundtouch.SoundTouch
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_dialog.*
-import kotlinx.coroutines.*
-import java.lang.Runnable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
 const val TAG = "MainActivity"
@@ -74,29 +74,11 @@ class MainActivity : DialogActivity(), ServiceConnection, Runnable,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         println("123")
-        // pgView.setMaxProgress(1111111.0)
-        //pgView.setCurrentProgress(0.0)
         val visView = findViewById<VisualizerView>(R.id.home_iv_media_spectrogram)
-        /* val array = ByteArray(129)
-
-         for (i in 0 until  array.size) {
-             array[i] = 30
-         }
-         visView.updateVisualizer(array)*/
-
 
         tv.setOnClickListener {
             Log.i("MainActivity", "onclick")
-
-            /*setDialogContent("上传成功", R.drawable.icon_dialog_upload_ok)
-            GlobalScope.launch(Dispatchers.Default) {
-                delay(1000)
-                withContext(Dispatchers.Main) {
-                    setDialogContent("上传失败", R.drawable.icon_dialog_upload_err)
-
-                }
-            }
-            showDialog()*/
+            //testSoundTouch()
             mService?.let { stub ->
                 if (stub.isPlaying) {
                     tv.text = "播放"
@@ -118,7 +100,25 @@ class MainActivity : DialogActivity(), ServiceConnection, Runnable,
             }
         }
         live_progress.setOnProgressChangedListener(this)
+        initWave()
         initData()
+    }
+
+    private val scheduledExecutor by lazy { Executors.newSingleThreadScheduledExecutor() }
+    private var count = 0
+    private fun initWave() {
+        scheduledExecutor.scheduleAtFixedRate({
+            val random = (0..7).random()
+            home_record_wave.addLine(random)
+            count += 100
+            if (count >= 15_000) {
+                if (scheduledExecutor.isShutdown.not()) {
+                    scheduledExecutor.shutdown()
+                    count = 0
+                    return@scheduleAtFixedRate
+                }
+            }
+        }, 10, 150, TimeUnit.MILLISECONDS)
     }
 
     private fun setDialogContent(content: String, id: Int) {
@@ -157,16 +157,17 @@ class MainActivity : DialogActivity(), ServiceConnection, Runnable,
 
     private var mService: IMediaPlayer.Stub? = null
     private fun initData() {
-        testSoundTouch()
+
         live_progress.setMaxProgress(10000.0)
-        //startService()
+        startService()
 
     }
 
     private fun testSoundTouch() {
         val soundTouch = SoundTouch()
         val inFileName = url
-        val outFileName = "/mnt/sdcard/myaudio/guofeng1.wav"
+        val outFileName = "/mnt/sdcard/myaudio/guofeng2.wav"
+        Log.i("SoundTouch", "version:${SoundTouch.getVersionString()} !")
         soundTouch.run {
             //取值0.01-1
             setTempo(1.0f)
@@ -180,8 +181,9 @@ class MainActivity : DialogActivity(), ServiceConnection, Runnable,
                 val duration = (endTime - startTime) * 0.001f
                 Log.i("SoundTouch", "转换完成, result=$result, 耗时:$duration, 输出:$outFileName")
                 withContext(Dispatchers.Main) {
+                    close()
                     if (result == 0) {
-                        url = outFileName
+                        // url = outFileName
                         setDialogContent("转换成功", R.drawable.icon_dialog_upload_ok)
                     } else {
                         setDialogContent("转换失败", R.drawable.icon_dialog_upload_err)

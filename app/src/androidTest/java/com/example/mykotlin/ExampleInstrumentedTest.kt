@@ -1,5 +1,6 @@
 package com.example.mykotlin
 
+import android.location.Location
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 
@@ -38,5 +39,21 @@ class ExampleInstrumentedTest {
         val url = "https://broad-video.zhidaohulian.com/audio/栏目2.m4a"
         println("before: $url")
         println("after: ${URLEncoder.encode(url,"utf-8")}")
+    }
+    @Test
+    fun testDirection() {
+        //昌平
+        val lat1 = 40.22
+        val lng1 = 116.2
+        //目标大兴
+        val dstLat = 39.73
+        val dstLng = 116.33
+        println("输入经纬度1={$lat1,$lng1)  经纬度2={$dstLat,$dstLng) ")
+        var floatArray = floatArrayOf(0.0f,0.0f,0.0f)
+        Location.distanceBetween(lat1,lng1,lat1,lng1,floatArray)
+        for (fl in floatArray) {
+            println("距离: $fl")
+        }
+
     }
 }

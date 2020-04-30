@@ -33,4 +33,14 @@
         <attr format="integer" name="spaceMax"/>
         <attr format="integer" name="spaceMin"/>
     </declare-styleable>
+
+    <declare-styleable name="RecordWaveView">
+        <attr name="space" format="dimension" />
+        <attr name="lineWidth" format="dimension" />
+        <attr name="maxHeight" format="dimension" />
+        <attr name="minHeight" format="dimension" />
+        <attr name="lineColor" format="color" />
+        <attr name="lineColor_start" format="color" />
+        <attr name="lineColor_end" format="color" />
+    </declare-styleable>
 </resources>

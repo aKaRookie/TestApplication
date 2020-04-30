@@ -1,23 +1,0 @@
-
-|squid:S1450"[Remove the "mRenderColor" field and declare it as a local variable in the relevant methods.(Ñœü—üÿÿÿÿ8²ºäÅç-
-Ž squid:ForLoopCounterChangedCheck"XRefactor the code in order to not assign to this loop counter from within the loop body.( æƒ«ýÿÿÿÿ8²ºäÅç-
-Isquid:S1068"-Remove this unused "mSpaceMin" private field.(¿£–Ï8²ºäÅç-
-Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8²ºäÅç-
-‰ squid:ForLoopCounterChangedCheck"XRefactor the code in order to not assign to this loop counter from within the loop body.(¯ÀÚè8²ºäÅç-
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ä¬ÕÊ8²ºäÅç-
-<squid:S1659" Declare "r2" on a separate line.(ÿ‘Ÿï8²ºäÅç-
-_squid:S1854"CRemove this useless assignment to local variable "captureListener".(ÑðÅÙ8²ºäÅç-
-<squid:S1659" Declare "b2" on a separate line.(ÿ‘Ÿï8²ºäÅç-
-tsquid:S1450"XRemove the "mSpaceMin" field and declare it as a local variable in the relevant methods.(¿£–Ï8²ºäÅç-
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(“ä„ñýÿÿÿÿ8²ºäÅç-
-<squid:S1659" Declare "b1" on a separate line.(ÿ‘Ÿï8²ºäÅç-
-lsquid:S1192"KDefine a constant instead of duplicating this literal "Visualizer" 3 times.(µ¦ûÎúÿÿÿÿ8²ºäÅç-
-<squid:S1659" Declare "g1" on a separate line.(ÿ‘Ÿï8²ºäÅç-
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ºå»¸ùÿÿÿÿ8ŒŸ‡ãé-
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(”•äñùÿÿÿÿ8…˜µúæ-
-<squid:S1659" Declare "g2" on a separate line.(ÿ‘Ÿï8²ºäÅç-
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÿ¼êëúÿÿÿÿ8²ºäÅç-
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ææ¯8åË¼úæ-
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‚ó«È8²ºäÅç-
-Psquid:S1481"4Remove this unused "captureListener" local variable.(ÑðÅÙ8²ºäÅç-
-dsquid:UnusedPrivateMethod"5Remove this unused private "drawRectsByVolum" method.(ç±”‡ûÿÿÿÿ8…˜µúæ-
